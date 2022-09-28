@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="main">
+    {% for item in products %}
+    <div class="item_list">
+       <p style="font-weight: bold; border-bottom: 1px solid #ccc;"> {{ item.items.name }} </p>
+       <p> {{ item.items.description|slice:":60" }}... </p>
+       <p> {{ item.items.price }} {{ item.items.currency }} </p>
+       <div class="choose">
+            <form action="/order" method="GET" class="form">
+                <a onclick="this.closest('form').submit();return false;" href="">Изменить количество</a>
+                <input type="hidden" name="choose" value="{{ item.items.id }}">
+                <input type="number" name="quantity" value="{{ item.quantity }}"/>шт.
+            </form>
+            <a href="?choose={{ item.items.id }}&del=1"> Убрать из заказа </a>
+       </div>
+    </div>
+    {% endfor %}
+
+    {% if quan_items %}
+
+    <div class="sum">
+         <p style="display: inline-block;">{{ order_sum }} </p>
+    </div>
+        <div class="pay_button">
+            <a href="/clear">Очистить заказ</a>
+            <form action="/buy/{{ order_id }}" method="GET">
+                <button type="submit">Оплатить</button>
+            </form>
+        </div>
+    {% else %}
+        <p> Корзина пуста </p>
+    {% endif %}
+
+</div>
+
+{% endblock %}

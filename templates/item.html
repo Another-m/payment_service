@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+<div class="item_1">
+    <p style="font-weight: bold; border-bottom: 1px solid #ccc; "> {{ item.name }} </p>
+    <p> {{ item.description }} </p>
+    <div style="float: left; bottom: 5px; margin: auto auto 10px 10px; position: absolute;">
+    <p style="font-size: 12pt; font-weight: bold;"> {{ item.price }} {{ item.currency }} </p>
+    </div>
+    <div class="choose">
+        <form action="/" method="GET" class="form">
+            <a onclick="this.closest('form').submit();return false;" href="">Выбрать</a>
+            <input type="hidden" name="choose" value="{{ item.id }}">
+            <input type="number" name="quantity" value="1"/>шт.
+        </form>
+
+   </div>
+</div>
+
+
+{% endblock %}

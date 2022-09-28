@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% for item in products %}
+
+<div class="item">
+
+   <p style="border-bottom: 1px solid #ccc; "> <a href="/{{ item.id }}"> {{ item.name }}</a> </p>
+   <p> {{ item.description }} </p>
+   <p> {{ item.price }} {{ item.currency }} </p>
+   <div class="choose">
+        <form action="/" method="GET" class="form">
+            <a onclick="this.closest('form').submit();return false;" href="">Выбрать</a>
+            <input type="hidden" name="choose" value="{{ item.id }}">
+            <input type="number" name="quantity" value="1"/>шт.
+        </form>
+
+   </div>
+</div>
+
+{% endfor %}
+
+{% endblock %}
